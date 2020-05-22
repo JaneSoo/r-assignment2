@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.8)  22 MAY 2020 10:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.4.8)  22 MAY 2020 15:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,42 +874,65 @@ Underfull \hbox (badness 10000) in paragraph at lines 201--202
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--206
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 206--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
 [3 <./figure/unnamed-chunk-3-1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 227--230
+Underfull \hbox (badness 10000) in paragraph at lines 210--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--246
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 261.
 [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 259.
- [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 259.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 261.
  (./501453-chim-kanitha-STAT-CS-2020-part2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 259.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 259.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 261.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 261.
 Package rerunfilecheck Info: File `501453-chim-kanitha-STAT-CS-2020-part2.out' 
 has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 259.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 261.
  ) 
 Here is how much of TeX's memory you used:
- 10267 strings out of 494923
- 141184 string characters out of 6180743
+ 10283 strings out of 494923
+ 141357 string characters out of 6180743
  438048 words of memory out of 5000000
- 13392 multiletter control sequences out of 15000+600000
- 15036 words of font info for 36 fonts, out of 8000000 for 9000
+ 13399 multiletter control sequences out of 15000+600000
+ 13493 words of font info for 34 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  33i,12n,47p,295b,2585s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/jane/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600p
-k> </home/jane/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1095.600p
+ </home/jane/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1095.600p
 k> </home/jane/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600p
 k> </home/jane/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600p
 k> </home/jane/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600p
@@ -927,11 +950,11 @@ pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy8.pfb>
-Output written on 501453-chim-kanitha-STAT-CS-2020-part2.pdf (6 pages, 185373 b
+Output written on 501453-chim-kanitha-STAT-CS-2020-part2.pdf (5 pages, 180843 b
 ytes).
 PDF statistics:
- 462 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
- 68 named destinations out of 1000 (max. 500000)
+ 454 PDF objects out of 1000 (max. 8388607)
+ 179 compressed objects within 2 object streams
+ 79 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

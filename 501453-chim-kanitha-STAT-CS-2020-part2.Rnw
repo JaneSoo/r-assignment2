@@ -184,6 +184,12 @@ mtext(bquote(log-likelihood == .(round(ans.poi.log.like, 2))), side = 2, line = 
 
 \section*{Exercise 4}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
+
+Null hypothesis— $H_0 : \rho = 0$ \newline
+
+Alternative hypothesis— $H_1 : \rho \neq 0$ \newline
+
+\noindent2. Calculate the value of test statistic. \newline
 <<>>=
 setwd(getwd())
 body <- read.table(file = 'body-measurements.txt', header = T)
@@ -198,51 +204,50 @@ mu.x <- mean(body.f.height)
 mu.y <- mean(body.f.neck)
 sigma2.x <- sd(body.f.height)
 sigma2.y <- sd(body.f.neck)
-correlation <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
+  correlation <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
 
 # Test Statistic Comparing Two Population Means: 978.969544271
 
+z <- (1/2)*log((1+r)/(1-r))
 
 @
 
-\section*{Exercise 4}
+\section*{Exercise 5}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
-$H_0: p \neq 0.5 $ \newline
-$H_1: p = 0.5$ \newline
+
+Null hypothesis— $H_0: p_1 - p_2 = 0$ \newline
+
+Alternative hypothesis— $H_1: p_1 - p_2 \neq 0$ \newline
 
 \noindent 2. Calculate the value of test statistic. \newline
 <<>>=
+n1 <- 200
+x1 <- 32
+
+#calculate the estimate probability of group 1
+p1.est <- x1 / n1
+
+n2 <- 230
+x2 <- 21
+
+#calculate the estimate probability of group 2
+p2.est <- x2 /n2
+
+#calculate the estimate variance
+var.est <- sqrt((p1.est*(1-p1.est))/n1 + (p2.est*(1-p2.est))/n2)
+
+p0 <- 0
+alpha <- 0.05
+
+#calculate the value of test statistics using Wald Test
+zW.obs <- (p1.est - p2.est - p0)/var.est
+
+#calculate the critical region
+z.CR.l <-qnorm(zW.obs, lower.tail = F)
+z.CR.u <-qnorm(zW.obs, lower.tail = T)
+
+0.1232558
 
 @
-
-\bigskip
-
-\subsection*{Results and interpretation}
-\noindent Text. Results in table or graphic form. Commentaries and interpretation of the results.
-
-Interpretation. Text. Commentary relating to tables and figures. 
-
-<<echo = F, results = "asis">>=
-print(xtable(char.mat, digits=c(0,0,2,2), align='|l|rrr|', caption="Characteristics of (name of variable)"), sanitize.text.function=function(x){x})
-
-# explanation of some settings:
-# echo = F in chunk settings will prevent R-code being printed in the resulting pdf
-# results="asis" in chunk settings together with the use of print() on the output from function xtable() will take the output as LaTeX code instead of R-output, which means it will directly create a classic table in the pdf
-# sanitize.text.function=function(x){x} used in print() will secure, that labels in LaTeX form (eg. '$\\overline{x}$') will be correctly compiled
-# whenever you would use a LaTeX command with \, in Rnw chunk you need to double it, eg. '$\\overline{x}$'
-# argument digits in function xtable() sets the number of digits to display in the corresponding columns, first number corresponds to row name, therefore it needs to be set to 0
-# argument align in function xtable() sets column alignment, just as you're used to in LaTeX tables
-# argument caption in function xtable() sets the table caption
-@
-
-<<fig.width=8, fig.height=6, out.height='.45\\textheight', out.width='.6\\textheight', fig.align='center', fig.pos='h', fig.cap='Histogram of (name of variable)'>>=
-hist(obs, main='', xlab='name of variable', ylab='frequency')
-@
-
-
-\newpage
-
-\section*{Exercise 2}
-\noindent Don't forget to check, whether you included all required outputs in each exercise.
 
 \end{document}

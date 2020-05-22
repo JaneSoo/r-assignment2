@@ -202,6 +202,12 @@ mtext(bquote(log-likelihood == .(round(ans.poi.log.like, 2))), side = 2, line = 
 
 \section*{Exercise 4}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
+
+Null hypothesis— $H_0 : \rho = 0$ \newline
+
+Alternative hypothesis— $H_1 : \rho \neq 0$ \newline
+
+\noindent2. Calculate the value of test statistic. \newline
 \begin{Schunk}
 \begin{Sinput}
 setwd(getwd())
@@ -217,43 +223,39 @@ mu.x <- mean(body.f.height)
 mu.y <- mean(body.f.neck)
 sigma2.x <- sd(body.f.height)
 sigma2.y <- sd(body.f.neck)
-correlation <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
+  correlation <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
 
 # Test Statistic Comparing Two Population Means: 978.969544271
-\end{Sinput}
-\end{Schunk}
 
-\section*{Exercise 4}
-\noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
-$H_0: p \neq 0.5 $ \newline
-$H_1: p = 0.5$ \newline
-
-\noindent 2. Calculate the value of test statistic. \newline
-
-
-\bigskip
-
-\subsection*{Results and interpretation}
-\noindent Text. Results in table or graphic form. Commentaries and interpretation of the results.
-
-Interpretation. Text. Commentary relating to tables and figures. 
-
-Error in xtable(char.mat, digits = c(0, 0, 2, 2), align = "|l|rrr|", caption = "Characteristics of (name of variable)"): could not find function "xtable"
-
-
-\begin{Schunk}
-\begin{Sinput}
-hist(obs, main='', xlab='name of variable', ylab='frequency')
+z <- (1/2)*log((1+r)/(1-r))
 \end{Sinput}
 \begin{Soutput}
-Error in hist(obs, main = "", xlab = "name of variable", ylab = "frequency"): object 'obs' not found
+Error in eval(expr, envir, enclos): object 'r' not found
 \end{Soutput}
 \end{Schunk}
 
+\section*{Exercise 5}
+\noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
 
-\newpage
+Null hypothesis— $H_0: p_1 - p_2 = 0$ \newline
 
-\section*{Exercise 2}
-\noindent Don't forget to check, whether you included all required outputs in each exercise.
+Alternative hypothesis— $H_1: p_1 - p_2 \neq 0$ \newline
+
+\noindent 2. Calculate the value of test statistic. \newline
+\begin{Schunk}
+\begin{Sinput}
+n1 <- 200
+x1 <- 32
+p1 <- x1 / n1
+
+n2 <- 230
+x2 <- 21
+p2 <- x2 /n2
+
+p0 <- 0.5
+
+alpha <- 0.05
+\end{Sinput}
+\end{Schunk}
 
 \end{document}

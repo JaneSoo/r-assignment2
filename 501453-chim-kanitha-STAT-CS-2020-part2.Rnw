@@ -185,41 +185,105 @@ mtext(bquote(log-likelihood == .(round(ans.poi.log.like, 2))), side = 2, line = 
 \section*{Exercise 4}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
 
-Null hypothesis— $H_0 : \rho = 0$ \newline
+Null hypothesis— $H_0 : \rho = \rho_0$ \newline
 
-Alternative hypothesis— $H_1 : \rho \neq 0$ \newline
+Alternative hypothesis— $H_1 : \rho \neq \rho_0$, \newline
 
-\noindent2. Calculate the value of test statistic. \newline
+where $\rho_0 = 0$\newline
+
+\noindent2. Calculate the value of test statistic.
 <<>>=
 setwd(getwd())
 body <- read.table(file = 'body-measurements.txt', header = T)
 body <- na.omit(body)
-
+body.f <- body[body$sex == 'f', ]
 body.f.height <- body[body$sex == 'f', 'body.H']
 body.f.neck <- body[body$sex == 'f', 'neck.C']
 
 n.x <- length(body.f.height)
 n.y <- length(body.f.neck)
-mu.x <- mean(body.f.height)
-mu.y <- mean(body.f.neck)
-sigma2.x <- sd(body.f.height)
-sigma2.y <- sd(body.f.neck)
-  correlation <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
+n <- n.x <- n.y
 
-# Test Statistic Comparing Two Population Means: 978.969544271
+rho0 <- 0
+alpha <- 0.05
 
-z <- (1/2)*log((1+r)/(1-r))
+#calculate the estimate of rho using function cor()
+rho.est <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
+
+#calculate ZR using Fisher Z -variable
+ZR <- 1/2 * log((1+ rho.est)/(1- rho.est))
+
+#calculate the value of xi
+xi <- 1/2 * log((1+ rho0)/(1-rho0))
+
+#calculate the value of test statistics
+zW <- sqrt(n -3)*(ZR - xi)
+# round(zW, 5) => 1.28516
+@
+
+Result: $zw = 1.28516$ \newline
+
+\noindent 3. Calculate the critical region and make your decision.
+<<>>=
+
+#calculate critical value using qnorm for lower bound
+z.CR.l <-qnorm(alpha/2, lower.tail = T)
+# round(z.CR.l, 5) => -1.95996
+
+#calculate critical value using qnorm for upper bound
+z.CR.u <-qnorm(alpha/2, lower.tail = F)
+# round(z.CR.u, 5) => 1.95996
 
 @
+
+Result: $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
+
+\noindent 4. Calculate the p-value and make your decision.
+<<>>=
+
+#calculate the p-value
+p.val.zW <- 2 * (1 - pnorm(abs(zW)))
+# round(p.val.zW, 5) => 0.19873
+@
+
+Result: $p-value = 0.19873$ \newline
+
+\noindent 5. Plot the density of the distribution, that the test statistic follows, and visualise the p-value.
+<<>>=
+library("ggpubr")
+ggscatter(body.f, x = 'body.H', y = 'neck.C', 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Height in mm", ylab = "Neck in mm")
+@
+
+\noindent 6. Calculate the confidence interval for $\rho$ and make your decision.
+<<>>=
+#calculate the confidence interval Uaplha/2 = 1.95996 for lower bound
+CI.zW.l <- ZR - 1.95996/sqrt(n-3)
+# round(CI.zW.l, 5) => -0.10669
+
+#calculate the confidence interval Uaplha/2 = 1.95996 for upper bound
+CI.zW.u <- ZR + 1.95996/sqrt(n-3)
+# round(CI.zW.u, 5) => 0.5131
+
+@
+
+Result: $CI: (-0.10669, 0.5131)$ \newline
+
+\noindent 7. Interpret your conclusion.
+
 
 \section*{Exercise 5}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
 
-Null hypothesis— $H_0: p_1 - p_2 = 0$ \newline
+Null hypothesis— $H_0: p_1 - p_2 = p_0$ \newline
 
-Alternative hypothesis— $H_1: p_1 - p_2 \neq 0$ \newline
+Alternative hypothesis— $H_1: p_1 - p_2 \neq p_0$, \newline
 
-\noindent 2. Calculate the value of test statistic. \newline
+where $p_0 = 0$\newline
+
+\noindent 2. Calculate the value of test statistic.
 <<>>=
 n1 <- 200
 x1 <- 32
@@ -241,13 +305,48 @@ alpha <- 0.05
 
 #calculate the value of test statistics using Wald Test
 zW.obs <- (p1.est - p2.est - p0)/var.est
+# round(zW.obs, 5) => 2.13765
+@
 
-#calculate the critical region
-z.CR.l <-qnorm(zW.obs, lower.tail = F)
-z.CR.u <-qnorm(zW.obs, lower.tail = T)
+Result: $zw = 2.13765 $ \newline
 
-0.1232558
+\noindent 3. Calculate the critical region and make your decision.
+<<>>=
+
+#calculate the critical region for lower bound
+z.CR.l <-qnorm(alpha/2, lower.tail = T)
+# round(z.CR.l, 5) => -1.95996
+
+#calculate the critical region for lower bound
+z.CR.u <-qnorm(alpha/2, lower.tail = F)
+# round(z.CR.u, 5) => 1.95996
 
 @
+
+Result: $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
+
+\noindent 4. Calculate the p-value and make your decision.
+<<>>=
+#calculate the p-value
+p.val.zW <- 2 * (1 - pnorm(abs(zW.obs)))
+# round(p.val.zW, 5) => 0.03255
+
+@
+
+Result: $p-value = 0.03255$ \newline
+
+\noindent 5. Calculate the confidence interval and make your decision.
+<<>>=
+#calculate the confidence interval for lower bound Ualpha/2 = 1.95996
+CI.zW.l <- p1.est - p2.est - (1.95996 * var.est)
+# round(CI.zW.l, 5) => 0.00571
+
+#calculate the confidence interval for upper bound Ualpha/2 = 1.95996
+CI.zW.u <- p1.est - p2.est + (1.95996 * var.est)
+# round(CI.zW.u, 5) => 0.13168
+
+@
+
+Result: $CI: (0.00571, 0.13168)$ \newline
 
 \end{document}

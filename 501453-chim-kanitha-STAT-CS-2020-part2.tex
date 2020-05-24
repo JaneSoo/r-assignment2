@@ -292,7 +292,7 @@ z.CR.u <-qnorm(alpha/2, lower.tail = F)
 \end{Sinput}
 \end{Schunk}
 {\bf Result:} $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
-The test statistic $zw = 1.39395$ does not belong to the critical region. Therefore we do not reject $H_0$. \newline
+The test statistic $zw = 1.39395$ does not belong to the critical region. Therefore $H_0$ is not rejected at significance level alpha = 0.05. \newline
 
 \noindent 4. Calculate the p-value and make your decision.
 \begin{Schunk}
@@ -303,7 +303,7 @@ p.val.zW <- 2 * (1 - pnorm(abs(zW)))
 \end{Sinput}
 \end{Schunk}
 {\bf Result:} $p-value = 0.16333$ \newline
-The p-value is {\bf 0.16333} which is greater than $\alpha = 0.05$. Therefore we do not reject $H_0$. \newline
+The p-value is {\bf 0.16333} which is greater than significance level $\alpha = 0.05$. Therefore $H_0$ is not rejected at significance level alpha = 0.05. \newline
 
 \noindent 5. Plot the density of the distribution, that the test statistic follows, and visualise the p-value.
 \begin{Schunk}
@@ -377,7 +377,7 @@ CI.zW.u <- tanh(ZR + 1.95996/sqrt(n-3))
 \end{Sinput}
 \end{Schunk}
 {\bf Result:} $CI: (-0.08418, 0.46209)$ \newline
-$\rho_0 = 0$ belongs to the value of $CI: (-0.08418, 0.46209)$. Therefore we do not reject $H_0$. \newline
+$\rho_0 = 0$ belongs to the value of $CI: (-0.08418, 0.46209)$. Therefore $H_0$ is not rejected at significance level alpha = 0.05. \newline
 
 \noindent 7. Interpret your conclusion. \newline
 
@@ -442,7 +442,7 @@ z.CR.u <-qnorm(alpha/2, lower.tail = F)
 \end{Sinput}
 \end{Schunk}
 {\bf Result:} $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
-The test statistic $zw = 2.13765$ belongs to the upper bound critical region. Therefore we reject $H_0$. \newline
+The test statistic $zw = 2.13765$ belongs to the upper bound critical region. Therefore $H_0$ is rejected at significance level alpha = 0.05. \newline
 
 \noindent 4. Calculate the p-value and make your decision.
 \begin{Schunk}
@@ -453,7 +453,7 @@ p.val.zW <- 2 * (1 - pnorm(abs(zW.obs)))
 \end{Sinput}
 \end{Schunk}
 {\bf Result:} $p-value = 0.03255$ \newline
-The p-value is {\bf 0.03255} which is smaller than $\alpha = 0.05$. Therefore we reject $H_0$. \newline
+The p-value is {\bf 0.03255} which is smaller than significance level $\alpha = 0.05$. Therefore $H_0$ is rejected at significance level alpha = 0.05. \newline
 
 \noindent 5. Calculate the confidence interval and make your decision.
 \begin{Schunk}
@@ -468,7 +468,7 @@ CI.zW.u <- p1.est - p2.est + (1.95996 * sd.est)
 \end{Sinput}
 \end{Schunk}
 {\bf Result:} $CI: (0.00571, 0.13168)$ \newline
-$p_0 = 0$ does not belong to the value of $CI: (0.00571, 0.13168)$. Therefore we reject $H_0$. \newline
+$p_0 = 0$ does not belong to the value of $CI: (0.00571, 0.13168)$. Therefore $H_0$ is rejected at significance level alpha = 0.05. \newline
 
 \noindent 6. Interpret your conclusion. \newline
 

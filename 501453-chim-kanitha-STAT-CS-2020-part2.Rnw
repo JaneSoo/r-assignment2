@@ -102,7 +102,7 @@ $P(x, \lambda) = \frac{e^{-\lambda} \lambda^{x}}{x!}$ \newline
 
 In Poisson distribution, the parameter of interest is $\lambda$. Having sequence of $X_n$, the probability of observing the sequence $X_n$ will be the product of probabilities of each of them. \newline
 
-Therefore, the kernel of likelihood function of Poisson distribution is: \newline
+{\bf Therefore, the kernel of likelihood function of Poisson distribution is:} \newline
 
 $L(\lambda|X) = \displaystyle\prod_{i=1}^{N} \frac{\lambda^{X_i} e^{-\lambda}}{X_i !}$ \newline
 
@@ -111,7 +111,7 @@ $L(\lambda|X) = \displaystyle\prod_{i=1}^{N} \frac{\lambda^{X_i} e^{-\lambda}}{X
 
 The formula for log-likelihood function of Poisson distribution is obtained by using natural logarithm on the likelihood function of Poisson distribution. \newline
 
-Therefore, the kernel of log-likelihood function of Poisson distribution is: \newline
+{\bf Therefore, the kernel of log-likelihood function of Poisson distribution is:} \newline
 
 $l(\lambda|X) = ln \left( \displaystyle\prod_{i=1}^{N} \frac{\lambda^{X_i} e^{-\lambda}}{X_i !} \right)$ \newline
 
@@ -129,39 +129,42 @@ $\hat{\lambda} = \frac{\sum_{i=1}^{N}x_i}{N}$ \newline
 
 \noindent 4. Create your own R-function for calculating the value of log-likelihood function of Poisson distribution.
 <<>>=
-#set up sequence of x according to exercise description
+#set up x according to exercise description
 x <-c(117, 109, 109, 89, 120, 88, 99, 103, 109, 91, 107, 101, 109, 117, 96, 95, 129, 96, 105, 98)
 
 #n number of observation
 n <- 20
 
 #the function will take 2 parameters lambda and x
-#n is number of obervations
 #lambda is mean
 #x is the sequence of observed values
 #finally it will return the value of log-likelihood of Poisson distribution
 poi.log.likelihood <- function(lambda, x){
-  n <- length(x)
+  n <- length(x) #n is number of obervations
   log.like <- sum(x) * log(lambda) - n * lambda
   return(-log.like)
 }
 
-#store value of poi.log.likelihood in variable ans.poi.log.like
+#call function poi.log.likelihood 
+#passing 2 variable lambda(mean) and x
+#store return value in variable ans.poi.log.like
 ans.poi.log.like <- poi.log.likelihood(mean(x), x)
 
 @
-The value of log-likelihood function of Poisson distribution is -7612.856. \newline
+The value of log-likelihood function of Poisson distribution is {\bf -7612.856 }. \newline
 
 \noindent 5. Using function optimize() find $\hat{\lambda}$. Compare it to the estimate you get from the exact formula.
 <<>>=
 #this function will take 2 parameters x and n
 #x is the sequence of observed values
 #n is number of obervation
-#finally it will return lambda hat which is the mean
+#finally it will return lambda hat
 lambda.hat <- function(x, n){
   return(sum(x)/n)
 }
 
+#call function lambda.hat
+#passing 2 variables x and n
 #store value of estimate lambda in ans.lambda.hat
 ans.lambda.hat <- lambda.hat(x, n)
 
@@ -171,16 +174,16 @@ ans.lambda.hat <- lambda.hat(x, n)
 #in this case we interest in the value of maximum
 lambda.hat.est <- optimize(f = poi.log.likelihood, interval = c(88, 129), maximum = T, x = x)$maximum
 @
-The exact value of $\hat{\lambda}$ is 104.35 and the estimate value of $\hat{\lambda}$ is 128.9999. \newline
-Using function optimize the value of $\hat{\lambda}$ is greater than using the exact function. \newline
+The exact value of $\hat{\lambda}$ is {\bf 104.35} and the estimate value of $\hat{\lambda}$ is {\bf 128.9999}. \newline
+Using function optimize the value of $\hat{\lambda}$ is greater than using the exact formula \newline
 
 \noindent 6. Plot the log-likelihood function, highlight the maximum and denote the maximum likelihood
 estimate in plot margin.
 <<>>=
-#set sequence of lambda for x-axis
+#create sequence of lambda for x-axis from min(x) to max(x)
 lambda.seq <- seq(from=min(x), to=max(x), length=20)
 
-#prepare value for y-axis
+#prepare value for y-axis using function apply
 l.lambda <- apply(X = as.matrix(lambda.seq), MARGIN = 1, FUN = poi.log.likelihood, x=x)
 
 #generate plot for log-likelihood function of poisson distribution
@@ -205,9 +208,9 @@ mtext(bquote(log-likelihood == .(round(ans.poi.log.like, 2))), side = 2, line = 
 \section*{Exercise 4}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
 
-Null hypothesis— $H_0 : \rho = \rho_0$ \newline
+{\bf Null hypothesis—} $H_0 : \rho = \rho_0$ \newline
 
-Alternative hypothesis— $H_1 : \rho \neq \rho_0$, \newline
+{\bf Alternative hypothesis—} $H_1 : \rho \neq \rho_0$, \newline
 
 where $\rho_0 = 0$\newline
 
@@ -229,9 +232,6 @@ body.f.neck <- body[body$sex == 'f', 'neck.C']
 body.f.height <- na.omit(body.f.height)
 body.f.neck <- na.omit(body.f.neck)
 
-#create dataframe for body height and neck
-df <- data.frame(body.f.height, body.f.neck)
-
 #get length of the data
 n.x <- length(body.f.height)
 n.y <- length(body.f.neck)
@@ -244,6 +244,7 @@ rho0 <- 0
 alpha <- 0.05
 
 #calculate the estimate of rho using function cor()
+#passing vector of body.f.height and body.f.neck
 rho.est <- cor(body.f.height, body.f.neck, method = c("pearson", "kendall", "spearman"))
 
 #calculate ZR using Fisher Z -variable
@@ -256,8 +257,7 @@ xi <- 1/2 * log((1+ rho0)/(1-rho0))
 zW <- sqrt(n -3)*(ZR - xi)
 # round(zW, 5) => 1.39395
 @
-
-Result: $zw = 1.39395$ \newline
+{\bf Result:} $zw = 1.39395$ \newline
 
 \noindent 3. Calculate the critical region and make your decision.
 <<>>=
@@ -271,9 +271,7 @@ z.CR.u <-qnorm(alpha/2, lower.tail = F)
 # round(z.CR.u, 5) => 1.95996
 
 @
-
-Result: $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
-
+{\bf Result:} $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
 The test statistic $zw = 1.39395$ does not belong to the critical region. Therefore we do not reject $H_0$. \newline
 
 \noindent 4. Calculate the p-value and make your decision.
@@ -283,17 +281,17 @@ The test statistic $zw = 1.39395$ does not belong to the critical region. Theref
 p.val.zW <- 2 * (1 - pnorm(abs(zW)))
 # round(p.val.zW, 5) => 0.16333
 @
-
-Result: $p-value = 0.16333$ \newline
-
-The p-value is 0.16333 which is greater than $\alpha = 0.05$. Therefore we do not reject $H_0$. \newline
+{\bf Result:} $p-value = 0.16333$ \newline
+The p-value is {\bf 0.16333} which is greater than $\alpha = 0.05$. Therefore we do not reject $H_0$. \newline
 
 \noindent 5. Plot the density of the distribution, that the test statistic follows, and visualise the p-value.
 <<>>=
+#create plot for bivariate distribution
+
 #create data frame for body neck and height
 df <- data.frame(body.f.neck, body.f.height)
 
-#load library called MASS for function kde2d
+#load library called MASS to use function kde2d
 library(MASS)
 
 #call function kde2d to generate density of body neck and height
@@ -305,10 +303,12 @@ plot1 <- contour(body_density, xlab='Neck (mm)', ylab= 'Height (mm)', main='Dens
 #add text showing p-value on top right of the plot
 text(x = 355, y = 1820, labels = "p-value = 0.16333 ", xpd = NA, col = 'red')
 
-#set sequence of test statistic value
+#create another plot based on test statistics density distribution
+
+#set sequence of test statistic from -3 to 3
 zw.seq <- seq(-3,3, by = .1) 
 
-#using dnorm for density distribution
+#using dnorm to create density distribution
 dvalues <- dnorm(zw.seq)
 
 #plot the test statistic
@@ -349,40 +349,36 @@ CI.zW.u <- tanh(ZR + 1.95996/sqrt(n-3))
 # round(CI.zW.u, 5) => 0.46209
 
 @
-
-Result: $CI: (-0.08418, 0.46209)$ \newline
-
+{\bf Result:} $CI: (-0.08418, 0.46209)$ \newline
 $\rho_0 = 0$ belongs to the value of $CI: (-0.08418, 0.46209)$. Therefore we do not reject $H_0$. \newline
 
 \noindent 7. Interpret your conclusion. \newline
 
 {\bf Statistical conclusion:} \newline
-
 $H_0$ is not rejected on a significant level $\alpha = 0.05$, because (1) test statistics does not belong to critical region, (2) $\rho_0 = 0$ belongs to the confidence interval, and (3) p-value is greater than 0.05. \newline 
 
 {\bf Verbal conclusion:} \newline
-
 We are not rejecting null hypothesis that is stated there is no correlation between body height and neck circumference of females. \newline
 
 \section*{Exercise 5}
 \noindent 1. Write down the null and the alternative hypotheses in mathematical form. \newline
 
-Null hypothesis— $H_0: p_1 - p_2 = p_0$ \newline
+{\bf Null hypothesis—} $H_0: p_1 - p_2 = p_0$ \newline
 
-Alternative hypothesis— $H_1: p_1 - p_2 \neq p_0$, \newline
+{\bf Alternative hypothesis—} $H_1: p_1 - p_2 \neq p_0$, \newline
 
 where $p_0 = 0$\newline
 
 \noindent 2. Calculate the value of test statistic.
 <<>>=
-#first group data n1: number of product from group 1, x1: number of faulty product from group 1
+#setup first group data n1: number of product from group 1, x1: number of faulty product from group 1
 n1 <- 200
 x1 <- 32
 
 #calculate the estimate probability of group 1
 p1.est <- x1 / n1
 
-#second group data n2: number of product from group 2, x2: number of faulty product from group 2
+#setup second group data n2: number of product from group 2, x2: number of faulty product from group 2
 n2 <- 230
 x2 <- 21
 
@@ -402,8 +398,7 @@ alpha <- 0.05
 zW.obs <- (p1.est - p2.est - p0)/sd.est
 # round(zW.obs, 5) => 2.13765
 @
-
-Result: $zw = 2.13765 $ \newline
+{\bf Result:} $zw = 2.13765 $ \newline
 
 \noindent 3. Calculate the critical region and make your decision.
 <<>>=
@@ -417,9 +412,7 @@ z.CR.u <-qnorm(alpha/2, lower.tail = F)
 # round(z.CR.u, 5) => 1.95996
 
 @
-
-Result: $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
-
+{\bf Result:} $W = (-\infty, -1.95996) \cup (1.95996, \infty) $ \newline
 The test statistic $zw = 2.13765$ belongs to the upper bound critical region. Therefore we reject $H_0$. \newline
 
 \noindent 4. Calculate the p-value and make your decision.
@@ -429,10 +422,8 @@ p.val.zW <- 2 * (1 - pnorm(abs(zW.obs)))
 # round(p.val.zW, 5) => 0.03255
 
 @
-
-Result: $p-value = 0.03255$ \newline
-
-The p-value is 0.03255 which is smaller than $\alpha = 0.05$. Therefore we reject $H_0$. \newline
+{\bf Result:} $p-value = 0.03255$ \newline
+The p-value is {\bf 0.03255} which is smaller than $\alpha = 0.05$. Therefore we reject $H_0$. \newline
 
 \noindent 5. Calculate the confidence interval and make your decision.
 <<>>=
@@ -445,19 +436,15 @@ CI.zW.u <- p1.est - p2.est + (1.95996 * sd.est)
 # round(CI.zW.u, 5) => 0.13168
 
 @
-
-Result: $CI: (0.00571, 0.13168)$ \newline
-
+{\bf Result:} $CI: (0.00571, 0.13168)$ \newline
 $p_0 = 0$ does not belong to the value of $CI: (0.00571, 0.13168)$. Therefore we reject $H_0$. \newline
 
 \noindent 6. Interpret your conclusion. \newline
 
 {\bf Statistical conclusion:} \newline
-
 $H_0$ is rejected on a significant level $\alpha = 0.05$, because (1) test statistics belongs to critical region, (2) $p_0 = 0$ does not belong to the confidence interval, and (3) p-value is less than 0.05. \newline 
 
 {\bf Verbal conclusion:} \newline
-
 We are rejecting null hypothesis that the probability of getting a faulty product are the same in both factories.
 
 \end{document}
